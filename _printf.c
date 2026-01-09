@@ -4,7 +4,7 @@
  * _printf - produces output according to a format
  * @format: format string
  *
- * Return: number of characters printed
+ * Return: number of characters printed, or -1 on error
  */
 int _printf(const char *format, ...)
 {
@@ -27,6 +27,14 @@ int _printf(const char *format, ...)
         else
         {
             i++;
+
+            /* % at end of string → ERROR */
+            if (format[i] == '\0')
+            {
+                va_end(args);
+                return (-1);
+            }
+
             if (format[i] == 'c')
             {
                 _putchar(va_arg(args, int));
@@ -61,5 +69,4 @@ int _printf(const char *format, ...)
 
     va_end(args);
     return (count);
-}
-
+}    
