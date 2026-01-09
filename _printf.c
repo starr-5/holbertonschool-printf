@@ -28,7 +28,6 @@ int _printf(const char *format, ...)
         {
             i++;
 
-            /* % at end of string → ERROR */
             if (format[i] == '\0')
             {
                 va_end(args);
@@ -52,6 +51,10 @@ int _printf(const char *format, ...)
                     str++;
                 }
             }
+            else if (format[i] == 'd' || format[i] == 'i')
+            {
+                count += print_number(va_arg(args, int));
+            }
             else if (format[i] == '%')
             {
                 _putchar('%');
@@ -69,4 +72,4 @@ int _printf(const char *format, ...)
 
     va_end(args);
     return (count);
-}    
+}
